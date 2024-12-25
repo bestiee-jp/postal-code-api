@@ -1,34 +1,34 @@
-# 日本の郵便番号API
+# 日本の郵便番号 API
 
 [![](https://github.com/ttskch/jp-postal-code-api/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/ttskch/jp-postal-code-api/actions/workflows/ci.yaml?query=branch:main)
 [![codecov](https://codecov.io/gh/ttskch/jp-postal-code-api/graph/badge.svg?token=68Rpm1PpUr)](https://codecov.io/gh/ttskch/jp-postal-code-api)
 [![](https://github.com/ttskch/jp-postal-code-api/actions/workflows/cron.yaml/badge.svg?branch=main)](https://github.com/ttskch/jp-postal-code-api/actions/workflows/cron.yaml?query=branch:main)
 [![](https://github.com/ttskch/jp-postal-code-api/actions/workflows/pages/pages-build-deployment/badge.svg?branch=main)](https://github.com/ttskch/jp-postal-code-api/actions/workflows/pages/pages-build-deployment?query=branch:main)
 
-日本の郵便番号から住所のデータを取得できるWeb APIです。
+日本の郵便番号から住所のデータを取得できる Web API です。
 
-GitHub Pagesを使用して静的なJSONファイルとして配信しているため、可用性が高いのが特徴です。また、オープンソースなのでクライアントワークでも安心してご使用いただけます。もしリポジトリの永続性や [GitHub Pagesの利用制限](#github-pagesの利用制限について) が心配な場合は、ご自由にフォークしてご利用ください。
+GitHub Pages を使用して静的な JSON ファイルとして配信しているため、可用性が高いのが特徴です。また、オープンソースなのでクライアントワークでも安心してご使用いただけます。もしリポジトリの永続性や [GitHub Pages の利用制限](#github-pagesの利用制限について) が心配な場合は、ご自由にフォークしてご利用ください。
 
-[日本郵便によって公開されているデータ](https://www.post.japanpost.jp/zipcode/download.html) を元に住所データのJSONファイルを生成して配信しています。配信データはGitHub Actionsを使用して [毎日最新の内容に更新しています](https://github.com/ttskch/jp-postal-code-api/actions/workflows/cron.yaml?query=branch:main)。
+[日本郵便によって公開されているデータ](https://www.post.japanpost.jp/zipcode/download.html) を元に住所データの JSON ファイルを生成して配信しています。配信データは GitHub Actions を使用して [毎日最新の内容に更新しています](https://github.com/ttskch/jp-postal-code-api/actions/workflows/cron.yaml?query=branch:main)。
 
 > [!NOTE]
-> このプロジェクトの実装は [madefor/postal-code-api](https://github.com/madefor/postal-code-api) にインスピレーションを受けています。長期間メンテナンスが行われていない同プロジェクトに代わるものとして、モダンPHPで再実装しました。オリジナルのソースコードに最大の敬意を表します。
+> このプロジェクトの実装は [madefor/postal-code-api](https://github.com/madefor/postal-code-api) にインスピレーションを受けています。長期間メンテナンスが行われていない同プロジェクトに代わるものとして、モダン PHP で再実装しました。オリジナルのソースコードに最大の敬意を表します。
 
 ## デモ
 
-https://jp-postal-code-api.ttskch.com
+https://postal-code-api.best-teach.jp
 
 ## エンドポイント
 
 ```
-https://jp-postal-code-api.ttskch.com/api/v1/{郵便番号}.json
+https://postal-code-api.best-teach.jp/api/v1/{郵便番号}.json
 ```
 
 ## 使い方
 
-例えば、郵便番号が `100-0014` の住所（東京都千代田区永田町）を取得したい場合は、エンドポイントのURLとレスポンスの内容は以下のようになります。
+例えば、郵便番号が `100-0014` の住所（東京都千代田区永田町）を取得したい場合は、エンドポイントの URL とレスポンスの内容は以下のようになります。
 
-https://jp-postal-code-api.ttskch.com/api/v1/1000014.json
+https://postal-code-api.best-teach.jp/api/v1/1000014.json
 
 ```json
 {
@@ -62,9 +62,9 @@ https://jp-postal-code-api.ttskch.com/api/v1/1000014.json
 }
 ```
 
-1つの郵便番号に複数の住所がある場合は、レスポンスの内容は以下のようになります。
+1 つの郵便番号に複数の住所がある場合は、レスポンスの内容は以下のようになります。
 
-https://jp-postal-code-api.ttskch.com/api/v1/6180000.json
+https://postal-code-api.best-teach.jp/api/v1/6180000.json
 
 ```json
 {
@@ -124,8 +124,7 @@ https://jp-postal-code-api.ttskch.com/api/v1/6180000.json
 
 大口事業所個別番号では、事業所名以外のカナ表記と英語表記は空になります。
 
-
-https://jp-postal-code-api.ttskch.com/api/v1/1008111.json
+https://postal-code-api.best-teach.jp/api/v1/1008111.json
 
 ```json
 {
@@ -159,9 +158,9 @@ https://jp-postal-code-api.ttskch.com/api/v1/1008111.json
 }
 ```
 
-[2024年1月1日に市町村変更があった住所](https://www.post.japanpost.jp/zipcode/merge/index.html) を取得すると、2024年5月現在では英語表記は出力されません。[元データ](https://www.post.japanpost.jp/zipcode/dl/roman-zip.html) が更新されると、このWeb APIの配信データも最大1日の誤差で自動的に更新されます。
+[2024 年 1 月 1 日に市町村変更があった住所](https://www.post.japanpost.jp/zipcode/merge/index.html) を取得すると、2024 年 5 月現在では英語表記は出力されません。[元データ](https://www.post.japanpost.jp/zipcode/dl/roman-zip.html) が更新されると、この Web API の配信データも最大 1 日の誤差で自動的に更新されます。
 
-https://jp-postal-code-api.ttskch.com/api/v1/4328003.json
+https://postal-code-api.best-teach.jp/api/v1/4328003.json
 
 ```json
 {
@@ -197,32 +196,32 @@ https://jp-postal-code-api.ttskch.com/api/v1/4328003.json
 
 ## 配信データの仕様
 
-Web APIの配信データは [日本郵便によって公開されているデータ](https://www.post.japanpost.jp/zipcode/download.html) を元に生成しています。具体的なスキーマは [使い方](#使い方) の例をご参照ください。 日本語表記・カナ表記・英語表記の住所データが含まれていますが、後述の制限事項があります。
+Web API の配信データは [日本郵便によって公開されているデータ](https://www.post.japanpost.jp/zipcode/download.html) を元に生成しています。具体的なスキーマは [使い方](#使い方) の例をご参照ください。 日本語表記・カナ表記・英語表記の住所データが含まれていますが、後述の制限事項があります。
 
 ### 制限事項
 
-* 大口事業所個別番号の住所データは以下のように出力されます（[元データ](https://www.post.japanpost.jp/zipcode/dl/jigyosyo/index-zip.html) の内容がそうであるため）
-    * カナ表記は事業所名についてのみ出力されます
-    * 事業所名のカナ表記は促音・拗音が大書きで出力されます
-    * 英語表記は出力されません
-* 一部の住所において、英語表記のうち主に `address2` フィールドの内容が途切れている場合があります（[元データ](https://www.post.japanpost.jp/zipcode/dl/roman-zip.html) の内容が [そうである](https://www.post.japanpost.jp/zipcode/dl/readme_ro.html#:~:text=%E5%8D%8A%E8%A7%92%E3%81%A8%E3%81%AA%E3%81%A3%E3%81%A6%E3%81%84%E3%82%8B%E3%83%AD%E3%83%BC%E3%83%9E%E5%AD%97%E9%83%A8%E5%88%86%E3%81%AE%E6%96%87%E5%AD%97%E6%95%B0%E3%81%8C35%E6%96%87%E5%AD%97%E3%82%92%E8%B6%85%E3%81%88%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AF%E3%80%81%E8%B6%85%E3%81%88%E3%81%9F%E9%83%A8%E5%88%86%E3%81%AE%E5%8F%8E%E9%8C%B2%E3%81%AF%E8%A1%8C%E3%81%A3%E3%81%A6%E3%81%8A%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82) ため）
-* 直近1年程度以内に [市町村変更があった住所](https://www.post.japanpost.jp/zipcode/merge/index.html) については、英語表記は出力されません（[元データが年1回程度しか更新されない](https://www.post.japanpost.jp/zipcode/dl/roman-zip.html) ため）
+-   大口事業所個別番号の住所データは以下のように出力されます（[元データ](https://www.post.japanpost.jp/zipcode/dl/jigyosyo/index-zip.html) の内容がそうであるため）
+    -   カナ表記は事業所名についてのみ出力されます
+    -   事業所名のカナ表記は促音・拗音が大書きで出力されます
+    -   英語表記は出力されません
+-   一部の住所において、英語表記のうち主に `address2` フィールドの内容が途切れている場合があります（[元データ](https://www.post.japanpost.jp/zipcode/dl/roman-zip.html) の内容が [そうである](https://www.post.japanpost.jp/zipcode/dl/readme_ro.html#:~:text=%E5%8D%8A%E8%A7%92%E3%81%A8%E3%81%AA%E3%81%A3%E3%81%A6%E3%81%84%E3%82%8B%E3%83%AD%E3%83%BC%E3%83%9E%E5%AD%97%E9%83%A8%E5%88%86%E3%81%AE%E6%96%87%E5%AD%97%E6%95%B0%E3%81%8C35%E6%96%87%E5%AD%97%E3%82%92%E8%B6%85%E3%81%88%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AF%E3%80%81%E8%B6%85%E3%81%88%E3%81%9F%E9%83%A8%E5%88%86%E3%81%AE%E5%8F%8E%E9%8C%B2%E3%81%AF%E8%A1%8C%E3%81%A3%E3%81%A6%E3%81%8A%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82) ため）
+-   直近 1 年程度以内に [市町村変更があった住所](https://www.post.japanpost.jp/zipcode/merge/index.html) については、英語表記は出力されません（[元データが年 1 回程度しか更新されない](https://www.post.japanpost.jp/zipcode/dl/roman-zip.html) ため）
 
 ### 自動更新
 
-[こちらのGitHub Actions Workflow](.github/workflows/cron.yaml) によって、[毎日午前0時頃に自動的に](https://github.com/ttskch/jp-postal-code-api/actions/workflows/cron.yaml?query=branch:main) Web APIの配信データの内容を最新化しています。更新処理の具体的な内容は以下のとおりです。
+[こちらの GitHub Actions Workflow](.github/workflows/cron.yaml) によって、[毎日午前 0 時頃に自動的に](https://github.com/ttskch/jp-postal-code-api/actions/workflows/cron.yaml?query=branch:main) Web API の配信データの内容を最新化しています。更新処理の具体的な内容は以下のとおりです。
 
-1. [日本郵便のWebサイト](https://www.post.japanpost.jp/zipcode/download.html) から [住所の郵便番号](https://www.post.japanpost.jp/zipcode/dl/kogaki-zip.html)、[住所の郵便番号（ローマ字）](https://www.post.japanpost.jp/zipcode/dl/roman-zip.html)、[事業所の個別郵便番号](https://www.post.japanpost.jp/zipcode/dl/jigyosyo/index-zip.html) のデータをダウンロード
-2. ダウンロードしたZipファイルからCSVファイルを取得
-3. CSVファイルをパースし、配信データとしてのJSONファイル群を生成
+1. [日本郵便の Web サイト](https://www.post.japanpost.jp/zipcode/download.html) から [住所の郵便番号](https://www.post.japanpost.jp/zipcode/dl/kogaki-zip.html)、[住所の郵便番号（ローマ字）](https://www.post.japanpost.jp/zipcode/dl/roman-zip.html)、[事業所の個別郵便番号](https://www.post.japanpost.jp/zipcode/dl/jigyosyo/index-zip.html) のデータをダウンロード
+2. ダウンロードした Zip ファイルから CSV ファイルを取得
+3. CSV ファイルをパースし、配信データとしての JSON ファイル群を生成
 4. その際、「住所の郵便番号」と「住所の郵便番号（ローマ字）」のデータを、日本語表記の住所が一致している場合にのみマージ
-5. 生成したJSONファイル群をコミットし、GitHub Pagesを更新
+5. 生成した JSON ファイル群をコミットし、GitHub Pages を更新
 
-## GitHub Pagesの利用制限について
+## GitHub Pages の利用制限について
 
-2024年5月現在、GitHub Pagesで公開したサイトには [月当たり100GBの帯域制限](https://docs.github.com/ja/pages/getting-started-with-github-pages/about-github-pages#:~:text=GitHub%20Pages%20%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AB%E3%81%AF%E3%80%81%E6%9C%88%E5%BD%93%E3%81%9F%E3%82%8A%20100%20GB%20%E3%81%AE%20%E3%82%BD%E3%83%95%E3%83%88%E3%81%AA%20%E5%B8%AF%E5%9F%9F%E5%B9%85%E5%88%B6%E9%99%90%E3%81%8C%E3%81%82%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82) があります。このWeb APIの配信データの容量は平均およそ400バイトなので、毎秒104リクエスト程度のペースが1ヶ月間継続すると制限の対象となる可能性があります。
+2024 年 5 月現在、GitHub Pages で公開したサイトには [月当たり 100GB の帯域制限](https://docs.github.com/ja/pages/getting-started-with-github-pages/about-github-pages#:~:text=GitHub%20Pages%20%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AB%E3%81%AF%E3%80%81%E6%9C%88%E5%BD%93%E3%81%9F%E3%82%8A%20100%20GB%20%E3%81%AE%20%E3%82%BD%E3%83%95%E3%83%88%E3%81%AA%20%E5%B8%AF%E5%9F%9F%E5%B9%85%E5%88%B6%E9%99%90%E3%81%8C%E3%81%82%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82) があります。この Web API の配信データの容量は平均およそ 400 バイトなので、毎秒 104 リクエスト程度のペースが 1 ヶ月間継続すると制限の対象となる可能性があります。
 
-もしこの制限が心配な場合は、本リポジトリをフォークしてご自身のGitHubアカウントでホストしてご利用ください。その場合、エンドポイントのURLは
+もしこの制限が心配な場合は、本リポジトリをフォークしてご自身の GitHub アカウントでホストしてご利用ください。その場合、エンドポイントの URL は
 
 ```
 https://{あなたのGitHubユーザー名}.github.io/jp-postal-code-api/api/v1/{郵便番号}.json
@@ -230,7 +229,7 @@ https://{あなたのGitHubユーザー名}.github.io/jp-postal-code-api/api/v1/
 
 のようになります。
 
-ただし、それでも悪意ある攻撃者によって大量のリクエストが行われると利用制限の対象になる可能性があります。どうしても心配な場合は、フォークしたリポジトリを [Cloudflare Pages](https://www.cloudflare.com/ja-jp/developer-platform/pages/) などの多機能なホスティングサービスやその他PaaSなどに接続して、BASIC認証などをかけた状態でWeb APIをホストするといった運用を検討してください。
+ただし、それでも悪意ある攻撃者によって大量のリクエストが行われると利用制限の対象になる可能性があります。どうしても心配な場合は、フォークしたリポジトリを [Cloudflare Pages](https://www.cloudflare.com/ja-jp/developer-platform/pages/) などの多機能なホスティングサービスやその他 PaaS などに接続して、BASIC 認証などをかけた状態で Web API をホストするといった運用を検討してください。
 
 ## ローカル環境での使用
 
@@ -248,8 +247,8 @@ $ bin/console build
 
 ## 貢献
 
-* バグの報告や機能の提案は [Issue](https://github.com/ttskch/jp-postal-code-api/issues) または [Pull Request](https://github.com/ttskch/jp-postal-code-api/pulls) にてお願いします
-* Starを付けていただけると開発者のモチベーションが上がります
+-   バグの報告や機能の提案は [Issue](https://github.com/ttskch/jp-postal-code-api/issues) または [Pull Request](https://github.com/ttskch/jp-postal-code-api/pulls) にてお願いします
+-   Star を付けていただけると開発者のモチベーションが上がります
 
 ## ライセンス
 
